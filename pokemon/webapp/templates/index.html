@@ -17,7 +17,8 @@
         <div class="card col-sm-2 m-2" style="width: 15rem;">
               <img src="..." class="card-img-top" alt="...">
               <div class="card-body">
-                    <h5 class="card-title">{{ p }}</h5>
+                    <h5 class="card-title">{{ p.name }}</h5>
+                    <a href="pokemon/{{p.name}}" class="btn btn-success">Ver</a>
               </div>
         </div>
         {% endfor %}
