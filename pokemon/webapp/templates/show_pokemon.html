@@ -15,9 +15,9 @@
                             <img src="{{ pokemon.sprites.front_default }}" alt="">
                         </div>
                         <div>
-                            <p class="card-title">N°: {{ pokemon.order }}</p>
-                            <p class="card-title">Name: {{ pokemon.name }}</p>
-                            <p class="card-title">type:
+                            <p class="mb-1 pb-1">N°: {{ pokemon.order }}</p>
+                            <p class="mb-1 pb-1">Name: {{ pokemon.name }}</p>
+                            <p class="mb-1 pb-1">Type:
                                 {% for p in pokemon.types %}
                                 {{ p.type.name }},
                                 {% endfor %}

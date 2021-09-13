@@ -8,11 +8,16 @@ def get_pokemon(api_pokemon):
 
 
 def get_types_pokemon():
+    normal = get_api('https://pokeapi.co/api/v2/type/1')
     types = get_types_weather()
     count = 0
     pokemon = []
     while count < len(types['pokemon']):
         pokemon.append(types['pokemon'][count]['pokemon'])
+        count = count + 1
+    count = 0
+    while count < len(normal['pokemon']):
+        pokemon.append(normal['pokemon'][count]['pokemon'])
         count = count + 1
     return pokemon
 
