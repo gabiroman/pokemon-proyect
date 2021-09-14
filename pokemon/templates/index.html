@@ -1,3 +1,4 @@
+{% load socialaccount %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,10 +7,21 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 </head>
 <body>
+    
 <header class="d-flex flex-column align-items-center">
     <img class="m-2" src="https://raw.githubusercontent.com/PokeAPI/media/master/logo/pokeapi_256.png" alt="">
     <h3 class="mb-0 pb-0">{{ weather.location }}</h3>
     <h5 class="mt-0 pt-0">{{ weather.temp_c }}° {{ weather.condition }}</h5>
+
+
+    <button class="btn btn-secondary btn-block mt-5" type="submit">Sign in!</button>
+<a class="btn btn-primary btn-block" href="{% provider_login_url "facebook" method="oauth2" %}">
+   <span class="fab fa-facebook"></span>
+      Login with facebook
+ </a>
+
+
+
 </header>
 <article class="container">
     <div class="row justify-content-center">
