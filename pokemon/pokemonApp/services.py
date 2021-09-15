@@ -1,8 +1,15 @@
 import requests
+import random
 from weather.services import get_weather
 
 
-list_pokemon = []
+def get_pokemon_home():
+    pokemon = get_name_pokemon()
+    list_pokemon = []
+    for p in pokemon:
+        list_pokemon.append(get_pokemon(
+            'https://pokeapi.co/api/v2/pokemon/' + p + '/'))
+    return list_pokemon
 
 
 def get_pokemon(api_pokemon):
@@ -10,33 +17,34 @@ def get_pokemon(api_pokemon):
     return response
 
 
-def get_types_pokemon():
-    normal = get_api('https://pokeapi.co/api/v2/type/1')
+def get_name_pokemon():
     types = get_type_by_temp()
-    count = 0
     pokemon = []
-    while count < len(types['pokemon']):
-        pokemon.append(types['pokemon'][count]['pokemon'])
-        count = count + 1
-    count = 0
-    while count < len(normal['pokemon']):
-        pokemon.append(normal['pokemon'][count]['pokemon'])
-        count = count + 1
-    return pokemon
+    for t in types:
+        pokemon.extend(iteration_name(get_api('https://pokeapi.co/api/v2/type/' + str(t))))
+    return random.sample(pokemon, 10)
 
 
 def get_type_by_temp():
     temp_c = get_weather()['temp_c']
-    types = get_types()
-    type_by_temp = []
+    types = [1]
     if temp_c >= 26:
-        type = get_api('https://pokeapi.co/api/v2/type/' + str(types[9]))
+        types.append(10)
     elif temp_c <= 10:
-        type = get_api('https://pokeapi.co/api/v2/type/' + str(types[14]))
+        types.append(15)
     elif temp_c > 10 or temp_c < 26:
-        type = get_api('https://pokeapi.co/api/v2/type/' + str(types[10]))
-    return type
-        
+        types.append(12)
+    return types
+
+
+def iteration_name(json):
+    count = 0
+    list_pokemon = []
+    while count < len(json['pokemon']):
+        list_pokemon.append(json['pokemon'][count]['pokemon']['name'])
+        count = count + 1
+    return random.sample(list_pokemon, 10)
+
 
 def get_types():
     count = 1
